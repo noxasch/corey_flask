@@ -1,0 +1,23 @@
+{
+    // this will override settings.json
+    "python.pythonPath": "${workspaceFolder}\\venv\\Scripts\\python.exe", 
+    "python.venvPath": "${workspaceFolder}\\",
+    "terminal.integrated.env.windows": {
+        "PYTHONPATH":"${workspaceFolder}\\venv\\Scripts\\python.exe",
+        "FLASK_ENV": "development",
+        "FLASK_APP": "app.py"
+        // "PYTHONPATH":"C:\\Python\\Python37\\python.exe",
+        // "PATH": "${env:PATH};" // echo %PATH% to check // seems to override python path on Windows LOL
+    },
+    // if use flake8
+    // "python.linting.pylintEnabled": false,
+    // "python.linting.flake8Enabled": true,
+    // "python.linting.enabled": true,
+    // "python.linting.flake8Args": [
+    //     "--max-line-length=120", // flake8 linting default is 80 which is annoying
+    // ]
+    "python.linting.pylintArgs": [
+        "--ignored-classes=SQLAlchemy" // ignore SQLAlchemy error which is not an error
+    ],
+    // "python.linting.pylintArgs": ["--load-plugins", "pylint_flask"] // doesn't seems to help
+  } 

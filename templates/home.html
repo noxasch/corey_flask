@@ -1,0 +1,12 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+  
+  {% for post in posts %}
+    <article class="ui segment">
+      <h2 class="ui header">{{ post.title }}</h2>
+      <span class="ui small text">By {{ post.author }} on {{ post.date_posted }}</span>
+      <p>{{ post.content }}</p>
+    </article>
+  {% endfor %}
+{% endblock body %}

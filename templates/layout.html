@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Flask Blog{% if title %} - {{ title }}{% endif %}</title>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.7.8/semantic.min.css">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  {% include 'components/_navbar.html' %}
+  <div class="ui stackable two column grid container">
+    <div class="sixteen wide mobile sixteen wide tablet eleven wide computer column">
+      {% include 'components/_messages.html' %}
+      {% block body %}{% endblock %}</div>
+    <div class="sixteen wide mobile sixteen wide tablet five wide computer column">{% include 'components/_sidebar.html' %}</div>
+  
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.7.8/semantic.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+  <div class="ui segment">
+    <h3>Join Today</h3>
+    <div class="ui divider"></div>
+    <form action="" method="POST" class="ui form{% if form.errors %}error{% endif %}">
+      {{ form.csrf_token }}
+      <div class="{%if form.username.flags.required %}required{% endif %} field">
+        {{ form.username.label }}
+        {{ form.username(class="text") }}
+        {% if form.username.errors %}
+        <div class="ui error message">
+          {% for error in form.username.errors %}
+              <p>{{ error }}</p>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      <div class="{%if form.email.flags.required %}required{% endif %} field">
+        {{ form.email.label }}
+        {{ form.email(class="text") }}
+        {% if form.email.errors %}
+        <div class="ui error message">
+          {% for error in form.email.errors %}
+              <p>{{ error }}</p>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      <div class="{%if form.password.flags.required %}required{% endif %} field">
+        {{ form.password.label }}
+        {{ form.password(class="text") }}
+        {% if form.password.errors %}
+        <div class="ui error message">
+          {% for error in form.password.errors %}
+              <p>{{ error }}</p>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      <div class="{%if form.confirm_password.flags.required %}required{% endif %} field">
+        {{ form.confirm_password.label }}
+        {{ form.confirm_password(class="text") }}
+        {% if form.confirm_password.errors %}
+        <div class="ui error message">
+          {% for error in form.confirm_password.errors %}
+              <p>{{ error }}</p>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      {#}
+      {% if form.errors %}
+          <div class="ui error message">
+            <div class="header">Error</div>
+            <ul class="list">
+            {% for error in form.errors %}
+              {% for err in form.errors[error] %}
+                <li>{{ error }} - {{ err }}</li>
+              {% endfor %}
+            {% endfor %}
+            </ul>
+          </div>
+      {% endif %} #}
+      {{ form.submit(class="ui button") }}
+    </form>
+  </div>
+  <div class="ui divider"></div>
+  <p class="ui text">
+    Already Have an Account ? <a href="{{ url_for('login') }}" class="ui text">Sign In</a>
+  </p>
+{% endblock body %}

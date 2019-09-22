@@ -1,0 +1,14 @@
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+          <div class="{{ category }}">{{ message }}</div>
+        {% endfor %}
+    {% endif%}
+{% endwith %}
+{# pass along when calling a template #}
+{% if error %}
+  <div class="ui negative message">{{ error }}</div>
+{% endif %}
+{% if success %}
+  <div class="ui positive messages">{{ success }}</div>
+{% endif %}

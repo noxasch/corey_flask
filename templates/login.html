@@ -1,0 +1,38 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+  <div class="ui segment">
+    <h3>Log In</h3>
+    <div class="ui divider"></div>
+    <form action="" method="POST" class="ui form {% if form.errors %}error{% endif %}">
+      {{ form.csrf_token }}
+      <div class="{%if form.email.flags.required %}required{% endif %} field">
+        {{ form.email.label }}
+        {{ form.email(class="text") }}
+        {% if form.email.errors %}
+        <div class="ui error message">
+          {% for error in form.email.errors %}
+              <p>{{ error }}</p>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      <div class="{%if form.password.flags.required %}required{% endif %} field">
+        {{ form.password.label }}
+        {{ form.password(class="text") }}
+      </div>
+      <div class="inline field">
+        <div class="ui checkbox">
+          {{ form.remember(class="hidden", tabindex=0) }}
+          {{ form.remember.label }}
+        </div>
+      </div>
+      {{ form.submit(class="ui button") }}
+      <div class="mt"><a href="#" class="ui small text">Forgot Password?</a></div>
+    </form>
+  </div>
+  <div class="ui divider"></div>
+  <p class="ui text">
+    Need an Account ? <a href="{{ url_for('register') }}" class="ui text">Sign Up</a>
+  </p>
+{% endblock body %}
