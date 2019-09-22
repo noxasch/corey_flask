@@ -17,7 +17,10 @@
     //     "--max-line-length=120", // flake8 linting default is 80 which is annoying
     // ]
     "python.linting.pylintArgs": [
-        "--ignored-classes=SQLAlchemy" // ignore SQLAlchemy error which is not an error
+        // "--ignored-classes=SQLAlchemy,scoped_session", // ignore SQLAlchemy error which is not an error
+        "--disable=C0111",
+        "--load-plugins", 
+        "pylint-flask",
+        "pylint-sqlalchemy"
     ],
-    // "python.linting.pylintArgs": ["--load-plugins", "pylint_flask"] // doesn't seems to help
   } 

@@ -3,7 +3,13 @@
     <a href="{{ url_for('home') }}" class="item">home</a>
     <a href="{{ url_for('about') }}" class="item">about</a>
     <div class="right menu">
-      <a href="{{ url_for('login') }}" class="item">Login</a>
-      <a href="{{ url_for('register') }}" class="item">Register</a>
+      {% if current_user.is_authenticated %}
+        <a href="{{ url_for('account') }}" class="item">{{ current_user.username }}</a>
+        <a href="{{ url_for('logout') }}" class="item">Logout</a>
+      {% else %}
+        <a href="{{ url_for('login') }}" class="item">Login</a>
+        <a href="{{ url_for('register') }}" class="item">Register</a>
+      {% endif %}
+
     </div>
   </div>

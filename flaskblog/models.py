@@ -1,12 +1,18 @@
 from datetime import datetime
-from flaskblog import db
+from flask_login import UserMixin
+from flaskblog import db, login_manager
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
 # currently intellisense for ORM not working on vscode
 # flask-pylint just ignore the error as well as flake8
 # not a linting issue https://github.com/PyCQA/pylint/issues/1973
 # same on pycharm
 # create DB table model
 # the class is User (Capitalized) but by default the table name is gonna be in all lowercase
-class User(db.Model):
+class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)

@@ -4,7 +4,7 @@
   <div class="ui segment">
     <h3>Join Today</h3>
     <div class="ui divider"></div>
-    <form action="" method="POST" class="ui form{% if form.errors %}error{% endif %}">
+    <form action="" method="POST" class="ui form {% if form.errors %}error{% endif %}">
       {{ form.csrf_token }}
       <div class="{%if form.username.flags.required %}required{% endif %} field">
         {{ form.username.label }}
