@@ -2,7 +2,8 @@ from datetime import datetime
 from flask_login import UserMixin
 from flaskblog import db, login_manager
 
-@login_manager.user_loader
+
+@login_manager.user_loader # this is how the login manager retrieve the current user
 def load_user(user_id):
     return User.query.get(int(user_id))
 

@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+  <article class="ui segment">
+    <h2 class="ui header">{{ post.title }}</h2>
+    <img class="ui avatar mini image" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}">
+    <span class="ui small text">By {{ post.author.username }} on {{ post.date_posted.strftime('%Y-%m-%d') }}</span>
+    {% if post.author == current_user %}
+    <div class="ui icon right floated small buttons">
+      <a class="ui basic primary button" href="{{ url_for('update_post', post_id=post.id) }}"><i class="icon edit outline"></i></a>
+      <button class="ui basic negative button"><i class="icon trash alternate outline"></i></button>
+    </div>
+    {% endif %}
+    <div class="ui divider"></div>
+    <p>{{ post.content }}</p>
+  </article>
+  <div class="ui mini modal">
+    <div class="ui icon header">
+      <i class="trash alternate outline icon"></i>
+      Delete Post ?
+    </div>
+    <div class="actions">
+      <form style="display:inline;" action="{{ url_for('delete_post', post_id=post.id) }}" method="POST">
+        {{ form.csrf_token }}
+        <button class="ui green ok inverted button">
+          <i class="checkmark icon"></i>
+          Yes
+        </button>
+      </form>
+      <div class="ui red cancel inverted button">
+        <i class="remove icon"></i>
+        No
+      </div>
+    </div>
+  </div>
+{% endblock body %}

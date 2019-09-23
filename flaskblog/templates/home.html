@@ -1,11 +1,12 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-  
   {% for post in posts %}
     <article class="ui segment">
-      <h2 class="ui header">{{ post.title }}</h2>
-      <span class="ui small text">By {{ post.author }} on {{ post.date_posted }}</span>
+      <h2 class="ui header"><a href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a></h2>
+      <img class="ui avatar mini image" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}">
+      <span class="ui small text">By {{ post.author.username }} on {{ post.date_posted.strftime('%Y-%m-%d') }}</span>
+      <div class="ui divider"></div>
       <p>{{ post.content }}</p>
     </article>
   {% endfor %}

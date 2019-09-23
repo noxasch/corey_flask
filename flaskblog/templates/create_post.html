@@ -1,0 +1,34 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+  <div class="ui segment">
+    <h3>{{ title }}</h3>
+    <div class="ui divider"></div>
+    <form action="" method="POST" class="ui form {% if form.errors %}error{% endif %}" novalidate>
+      {{ form.csrf_token }}
+      <div class="field">
+        {{ form.title.label }}
+        {{ form.title(class="text") }}
+        {% if form.title.errors %}
+        <div class="ui error message">
+          {% for error in form.title.errors %}
+              <p>{{ error }}</p>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      <div class="field">
+        {{ form.content.label }}
+        {{ form.content(class="text") }}
+        {% if form.content.errors %}
+        <div class="ui error message">
+          {% for error in form.content.errors %}
+              <p>{{ error }}</p>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      {{ form.submit(class="ui button") }}
+    </form>
+  </div>
+{% endblock body %}
