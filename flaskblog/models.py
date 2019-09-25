@@ -1,6 +1,7 @@
 from datetime import datetime
 from flask_login import UserMixin
-from flaskblog import db, login_manager
+from flaskblog import db, login_manager, app
+from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 
 
 @login_manager.user_loader # this is how the login manager retrieve the current user
@@ -28,6 +29,20 @@ class User(db.Model, UserMixin):
     # __ is magic method
     def __repr__(self):
         return f"User('{self.username}', '{self.email}', '{self.image_file}')"
+
+    def get_reset_token(self, expires_sec=1800):
+        s = Serializer(app.secret_key, expires_sec)
+        return s.dumps({'user_id':self.id}).decode('utf-8')
+
+    @staticmethod # does not need self as this is static method
+    def verify_reset_token(token):
+        s = Serializer(app.secret_key)
+        try:
+            user_id = s.loads(token)['user_id']
+            return User.query.get(user_id)
+        except Exception:
+            return None
+
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
