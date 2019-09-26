@@ -1,0 +1,34 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+  <div class="ui segment">
+    <h3>Reset Password</h3>
+    <div class="ui divider"></div>
+    <form action="" method="POST" class="ui form {% if form.errors %}error{% endif %}">
+      {{ form.csrf_token }}
+      <div class="{%if form.password.flags.required %}required{% endif %} field">
+        {{ form.password.label }}
+        {{ form.password(class="text") }}
+        {% if form.password.errors %}
+        <div class="ui error message">
+          {% for error in form.password.errors %}
+              <p>{{ error }}</p>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      <div class="{%if form.confirm_password.flags.required %}required{% endif %} field">
+        {{ form.confirm_password.label }}
+        {{ form.confirm_password(class="text") }}
+        {% if form.confirm_password.errors %}
+        <div class="ui error message">
+          {% for error in form.confirm_password.errors %}
+              <p>{{ error }}</p>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      {{ form.submit(class="ui button") }}
+    </form>
+  </div>
+{% endblock body %}
