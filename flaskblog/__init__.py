@@ -7,6 +7,7 @@ from flask_login import LoginManager # will handle session etc
 from flask_mail import Mail
 from flaskblog.config import config
 
+
 app = Flask(__name__)
 csrf = CSRFProtect(app)
 # source: https://flask-wtf.readthedocs.io/en/stable/csrf.html
@@ -37,9 +38,16 @@ app.config['MAIL_PASSWORD'] = config['PASSWORD']
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
-login_manager.login_view = 'login'
+login_manager.login_view = 'users.login'
 login_manager.login_message_category = 'ui warning message'
 
 mail = Mail(app)
 
-from flaskblog import routes # avoid circular import
+# from flaskblog import routes # avoid circular import
+from flaskblog.users.routes import users
+from flaskblog.posts.routes import posts
+from flaskblog.main.routes import main
+
+app.register_blueprint(users)
+app.register_blueprint(posts)
+app.register_blueprint(main)

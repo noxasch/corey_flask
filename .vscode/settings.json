@@ -19,8 +19,8 @@
     "python.linting.pylintArgs": [
         // "--ignored-classes=SQLAlchemy,scoped_session", // ignore SQLAlchemy error which is not an error
         "--disable=C0111",
-        "--load-plugins", 
-        "pylint-flask",
-        "pylint-sqlalchemy"
+        // "--load-plugins", 
+        // "pylint-flask",
+        // "pylint-sqlalchemy"
     ],
   } 

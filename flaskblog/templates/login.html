@@ -28,11 +28,11 @@
         </div>
       </div>
       {{ form.submit(class="ui button") }}
-      <div class="mt"><a href="{{ url_for('reset_request') }}" class="ui small text">Forgot Password?</a></div>
+      <div class="mt"><a href="{{ url_for('users.reset_request') }}" class="ui small text">Forgot Password?</a></div>
     </form>
   </div>
   <div class="ui divider"></div>
   <p class="ui text">
-    Need an Account ? <a href="{{ url_for('register') }}" class="ui text">Sign Up</a>
+    Need an Account ? <a href="{{ url_for('users.register') }}" class="ui text">Sign Up</a>
   </p>
 {% endblock body %}
