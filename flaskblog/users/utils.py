@@ -1,19 +1,19 @@
 import secrets, os
 from PIL import Image # pillow image manipulating
-from flask import url_for
+from flask import url_for, current_app
 from flask_mail import Message
-from flaskblog import app, mail
+from flaskblog import mail
 
 
 def delete_picture(old_picture):
-    os.remove(os.path.join(app.root_path, 'static/profile_pics', old_picture))
+    os.remove(os.path.join(current_app.root_path, 'static/profile_pics', old_picture))
 
 
 def save_picture(form_picture):
     random_hex = secrets.token_hex(8)
     _, f_ext = os.path.splitext(form_picture.filename)
     picture_fn = f'{random_hex}{f_ext}'
-    picture_path = os.path.join(app.root_path, 'static/profile_pics', picture_fn)
+    picture_path = os.path.join(current_app.root_path, 'static/profile_pics', picture_fn)
     # image resizing using PIL
     output_size = (150,150) 
     i = Image.open(form_picture)
