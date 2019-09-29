@@ -23,7 +23,7 @@ mail = Mail()
 def create_app(config_class=Config):
     app = Flask(__name__)
 
-    app.config.from_object(Config)
+    app.config.from_object(config_class)
 
     app.jinja_env.trim_blocks = True
     app.jinja_env.lstrip_blocks = True
@@ -41,5 +41,8 @@ def create_app(config_class=Config):
     app.register_blueprint(users)
     app.register_blueprint(posts)
     app.register_blueprint(main)
+
+    with app.app_context():
+        db.create_all()
 
     return app
